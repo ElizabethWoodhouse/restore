@@ -6,7 +6,7 @@ import {
 	Text,
 	SafeAreaView,
 	TextInput,
-	Button,
+	TouchableOpacity,
 	View,
 } from 'react-native';
 import DailyGratitudeImage from '../../public/js-images/dailygratitude-image';
@@ -21,7 +21,20 @@ class DailyGratitude extends Component {
 		return (
 			<SafeAreaView style={styles.container}>
 				<DailyGratitudeImage />
-				<View style={styles.taskContainer}>{/* form input */}</View>
+				<View style={styles.taskContainer}>
+					<TextInput
+						style={styles.textInput}
+						multiline={true}
+						// onChangeText={(text) => setEmail(text)}
+						// value={email}
+					/>
+					<TouchableOpacity
+						style={styles.button}
+						// onPress={() => onRegisterPress()}
+					>
+						<Text style={styles.buttonText}>Save Entry</Text>
+					</TouchableOpacity>
+				</View>
 			</SafeAreaView>
 		);
 	}
@@ -37,21 +50,21 @@ const styles = StyleSheet.create({
 	},
 	taskContainer: {
 		flex: 1,
-		//bring tasks up
 	},
 	textInput: {
-		width: 350,
-		height: 55,
+		width: 600,
+		height: 400,
 		margin: 10,
 		padding: 8,
 		borderRadius: 14,
 		backgroundColor: '#5F9E9D',
 		fontSize: 18,
-		fontWeight: '500',
+		fontFamily: 'AvenirNext-Regular',
+		color: '#4C322B',
 	},
 	button: {
+		alignSelf: 'center',
 		color: 'transparent',
-		alignItems: 'center',
 		padding: 10,
 		borderColor: '#4C322B',
 		width: 150,
@@ -60,6 +73,7 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 	},
 	buttonText: {
+		alignSelf: 'center',
 		fontSize: 20,
 		color: '#4C322B',
 		fontFamily: 'GillSans-LightItalic',

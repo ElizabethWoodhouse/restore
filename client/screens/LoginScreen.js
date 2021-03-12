@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
 		borderRadius: 14,
 		backgroundColor: '#5F9E9D',
 		fontSize: 18,
-		fontWeight: '500',
+		fontFamily: 'AvenirNext-Regular',
+		color: '#4C322B',
 	},
 	button: {
 		color: 'transparent',

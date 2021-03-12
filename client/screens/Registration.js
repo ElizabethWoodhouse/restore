@@ -55,8 +55,6 @@ function Registration(props) {
 				onChangeText={(text) => setConfirmPassword(text)}
 				value={confirmPassword}
 			/>
-			{/* TouchableOpacity: wrapper making views respond properly to touches.
-			(press down=> opacity of wrapped view dims) */}
 			<TouchableOpacity style={styles.button} onPress={() => onRegisterPress()}>
 				<Text style={styles.buttonText}>Create account</Text>
 			</TouchableOpacity>
@@ -86,7 +84,8 @@ const styles = StyleSheet.create({
 		borderRadius: 14,
 		backgroundColor: '#5F9E9D',
 		fontSize: 18,
-		fontWeight: '500',
+		fontFamily: 'AvenirNext-Regular',
+		color: '#4C322B',
 	},
 	button: {
 		color: 'transparent',
