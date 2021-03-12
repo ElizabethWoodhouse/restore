@@ -1,32 +1,37 @@
 import React from 'react';
-import { StyleSheet, Text, SafeAreaView, Button } from 'react-native';
+import {
+	StyleSheet,
+	Text,
+	SafeAreaView,
+	Button,
+	TouchableOpacity,
+} from 'react-native';
+// import { Button } from 'react-native-elements'
 import { connect } from 'react-redux';
 import { useEffect } from 'react/cjs/react.development';
+import Icon from '../../public/icon';
 
 function Welcome(props) {
 	//if user is already logged in then go to Main Page
-	useEffect(() => {
-		console.log(props);
-		if (props.userId === '') {
-			props.navigation.replace('Main');
-		}
-	});
+	// useEffect(() => {
+	// 	console.log(props);
+	// 	if (props.userId === '') {
+	// 		props.navigation.replace('Main');
+	// 	}
+	// });
 	return (
 		<SafeAreaView style={styles.container}>
-			<Text style={styles.headline}>Restore</Text>
-			<Text style={styles.innerText}>Self-care at your fingertips</Text>
-			<Button
+			<Icon />
+			<TouchableOpacity
 				style={styles.button}
-				color='#A3D2CA'
-				title='New User'
-				onPress={() => props.navigation.navigate('Register')}
-			/>
-			<Button
+				onPress={() => props.navigation.navigate('Register')}>
+				<Text style={styles.buttonText}>Log In</Text>
+			</TouchableOpacity>
+			<TouchableOpacity
 				style={styles.button}
-				color='#A3D2CA'
-				title='Log in'
-				onPress={() => props.navigation.navigate('Login')}
-			/>
+				onPress={() => props.navigation.navigate('Login')}>
+				<Text style={styles.buttonText}>Register</Text>
+			</TouchableOpacity>
 		</SafeAreaView>
 	);
 }
@@ -44,19 +49,19 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
-	headline: {
-		color: 'white',
-		fontSize: 60,
-		fontWeight: 'bold',
-	},
-	innerText: {
-		color: 'white',
-		fontSize: 20,
-		padding: 10,
-	},
 	button: {
+		color: 'transparent',
+		alignItems: 'center',
+		padding: 10,
+		borderColor: '#4C322B',
+		width: 150,
+		borderRadius: 20,
+		borderWidth: 0.5,
 		marginBottom: 20,
-		padding: 20,
-		backgroundColor: '#A3D2CA',
+	},
+	buttonText: {
+		fontSize: 20,
+		color: '#4C322B',
+		fontFamily: 'GillSans-LightItalic',
 	},
 });
