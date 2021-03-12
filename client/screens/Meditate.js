@@ -9,7 +9,7 @@ import {
 	View,
 } from 'react-native';
 
-class MainHabit extends Component {
+class Meditate extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -18,19 +18,7 @@ class MainHabit extends Component {
 	render() {
 		return (
 			<SafeAreaView style={styles.container}>
-				<Text style={styles.header}>Make time for you</Text>
-				<View style={styles.taskContainer}>
-					<TouchableOpacity
-						style={styles.button}
-						onPress={() => this.props.navigation.navigate('Meditate')}>
-						<Text style={styles.buttonText}>Meditate</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						style={styles.button}
-						onPress={() => this.props.navigation.navigate('DailyGratitude')}>
-						<Text style={styles.buttonText}>Daily Gratitude</Text>
-					</TouchableOpacity>
-				</View>
+				<Text style={styles.header}>Meditate</Text>
 			</SafeAreaView>
 		);
 	}
@@ -43,10 +31,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: '#6FB8B7',
-	},
-	taskContainer: {
-		flex: 1,
-		//bring tasks up
 	},
 	header: {
 		flex: 1,
@@ -77,4 +61,4 @@ const mapDispatchToProps = (dispatch) => {
 	return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainHabit);
+export default connect(mapStateToProps, mapDispatchToProps)(Meditate);
