@@ -6,9 +6,11 @@ import {
 	TextInput,
 	SafeAreaView,
 	TouchableOpacity,
+	View,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { getUser } from '../reducers/users';
+import LoginImage from '../../public/login-image';
 
 export class LoginScreen extends Component {
 	constructor(props) {
@@ -29,7 +31,7 @@ export class LoginScreen extends Component {
 		const { email, password } = this.state || '';
 		return (
 			<SafeAreaView style={styles.container}>
-				<Text style={styles.header}>Please log in below:</Text>
+				<LoginImage />
 				<TextInput
 					style={styles.textInput}
 					placeholder='Email'
@@ -40,7 +42,7 @@ export class LoginScreen extends Component {
 				<TextInput
 					secureTextEntry={true}
 					style={styles.textInput}
-					placeholder='password'
+					placeholder='Password'
 					onChangeText={(evt) => {
 						this.setState({ password: evt });
 					}}
@@ -63,36 +65,30 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: '#6FB8B7',
 	},
-	header: {
-		fontSize: 30,
-		fontWeight: 'bold',
-		padding: 10,
-		color: 'white',
-	},
 	textInput: {
 		width: 350,
 		height: 55,
 		margin: 10,
 		padding: 8,
 		borderRadius: 14,
-		backgroundColor: 'white',
+		backgroundColor: '#5F9E9D',
 		fontSize: 18,
 		fontWeight: '500',
 	},
 	button: {
-		marginBottom: 20,
-		padding: 20,
-		width: 250,
-		height: 30,
-		margin: 10,
-		padding: 8,
-		borderRadius: 14,
-		backgroundColor: 'white',
+		color: 'transparent',
+		alignItems: 'center',
+		padding: 10,
+		borderColor: '#4C322B',
+		width: 150,
+		borderRadius: 20,
+		borderWidth: 0.5,
+		marginTop: 20,
 	},
 	buttonText: {
-		textAlign: 'center',
-		fontSize: 18,
-		fontWeight: 'bold',
+		fontSize: 20,
+		color: '#4C322B',
+		fontFamily: 'GillSans-LightItalic',
 	},
 });
 

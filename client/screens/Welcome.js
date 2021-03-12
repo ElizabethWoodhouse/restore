@@ -25,12 +25,12 @@ function Welcome(props) {
 			<TouchableOpacity
 				style={styles.button}
 				onPress={() => props.navigation.navigate('Register')}>
-				<Text style={styles.buttonText}>Log In</Text>
+				<Text style={styles.buttonText}>Register</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
 				style={styles.button}
 				onPress={() => props.navigation.navigate('Login')}>
-				<Text style={styles.buttonText}>Register</Text>
+				<Text style={styles.buttonText}>Log In</Text>
 			</TouchableOpacity>
 		</SafeAreaView>
 	);

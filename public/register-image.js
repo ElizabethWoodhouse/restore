@@ -1,17 +1,17 @@
 import React from 'react';
 import { StyleSheet, Image, View } from 'react-native';
 
-const Icon = () => (
+const RegisterImage = () => (
 	<View>
-		<Image style={styles.image} source={require('./restore-logo.png')} />
+		<Image style={styles.image} source={require('./register.png')} />
 	</View>
 );
 
-export default Icon;
+export default RegisterImage;
 
 const styles = StyleSheet.create({
 	image: {
-		width: 600,
-		height: 500,
+		width: 400,
+		height: 190,
 	},
 });

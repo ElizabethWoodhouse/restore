@@ -1,17 +1,17 @@
 import React from 'react';
 import { StyleSheet, Image, View } from 'react-native';
 
-const Icon = () => (
+const LoginImage = () => (
 	<View>
-		<Image style={styles.image} source={require('./restore-logo.png')} />
+		<Image style={styles.image} source={require('./login.png')} />
 	</View>
 );
 
-export default Icon;
+export default LoginImage;
 
 const styles = StyleSheet.create({
 	image: {
-		width: 600,
-		height: 500,
+		width: 400,
+		height: 190,
 	},
 });
