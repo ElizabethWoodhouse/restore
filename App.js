@@ -3,16 +3,16 @@ import React, { useState, useEffect } from 'react';
 //redux
 import { Provider } from 'react-redux';
 import store from './client/store';
-import { firebase } from './firebase';
 
 //Navigation
 //Import other screens in my application
 import {
 	Welcome,
 	MainHabit,
-	Analytics,
 	LoginScreen,
 	Registration,
+	Meditate,
+	DailyGratitude,
 } from './client/screens/index';
 import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -25,34 +25,16 @@ const Stack = createStackNavigator();
 //////navigation.popToTop(): goes to the first screen in the stack
 
 function App() {
-	//useState: Hook that lets you add React state to function components. (ability to add state in functions)
-	//documentation: https://reactjs.org/docs/hooks-state.html
-	const [user, setUser] = useState(null);
-	useEffect(() => {
-		const usersRef = firebase.firestore().collection('users');
-		firebase.auth().onAuthStateChanged((user) => {
-			if (user) {
-				usersRef
-					.doc(user.uid)
-					.get()
-					.then((document) => {
-						const userData = document.data();
-						setUser(userData);
-					})
-					.catch((error) => {
-						console.log(error);
-					});
-			}
-		});
-	}, []);
 	return (
 		<Provider store={store}>
-			<NavigationContainer> 
+			<NavigationContainer>
 				<Stack.Navigator initialRouteName='Welcome'>
 					<Stack.Screen name='Welcome' component={Welcome} />
 					<Stack.Screen name='Main' component={MainHabit} />
 					<Stack.Screen name='Login' component={LoginScreen} />
 					<Stack.Screen name='Register' component={Registration} />
+					<Stack.Screen name='Meditate' component={Meditate} />
+					<Stack.Screen name='DailyGratitude' component={DailyGratitude} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</Provider>
@@ -60,5 +42,3 @@ function App() {
 }
 
 export default App;
-
-// {user?'Main':'Welcome'}

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
+import React, { Component } from 'react';
 import {
 	StyleSheet,
 	Text,
@@ -9,33 +10,49 @@ import {
 import { connect } from 'react-redux';
 import { getUser } from '../reducers/users';
 
-function LoginScreen(props) {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const onLoginPress = () => {
-		props.login(email, password);
-		props.navigation.replace('Main');
-	};
-	return (
-		<SafeAreaView style={styles.container}>
-			<Text style={styles.header}>Please log in below:</Text>
-			<TextInput
-				style={styles.textInput}
-				placeholder='Email'
-				onChangeText={(text) => setEmail(text)}
-				value={email}
-			/>
-			<TextInput
-				style={styles.textInput}
-				placeholder='password'
-				onChangeText={(text) => setPassword(text)}
-				value={password}
-			/>
-			<TouchableOpacity style={styles.button} onPress={() => onLoginPress()}>
-				<Text style={styles.buttonText}>Log in</Text>
-			</TouchableOpacity>
-		</SafeAreaView>
-	);
+export class LoginScreen extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			email: '',
+			password: '',
+			userId: '',
+		};
+		this.onLoginPress = this.onLoginPress.bind(this);
+	}
+	onLoginPress() {
+		this.props.login(this.state.email, this.state.password);
+		//ability to ensure logged in user is actually right
+		this.props.navigation.replace('Main');
+	}
+	render() {
+		const { email, password } = this.state || '';
+		return (
+			<SafeAreaView style={styles.container}>
+				<Text style={styles.header}>Please log in below:</Text>
+				<TextInput
+					style={styles.textInput}
+					placeholder='Email'
+					onChangeText={(evt) => {
+						this.setState({ email: evt });
+					}}
+				/>
+				<TextInput
+					secureTextEntry={true}
+					style={styles.textInput}
+					placeholder='password'
+					onChangeText={(evt) => {
+						this.setState({ password: evt });
+					}}
+				/>
+				<TouchableOpacity
+					style={styles.button}
+					onPress={() => this.onLoginPress()}>
+					<Text style={styles.buttonText}>Log in</Text>
+				</TouchableOpacity>
+			</SafeAreaView>
+		);
+	}
 }
 
 //CSS Styling
@@ -44,7 +61,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#3da0c2',
+		backgroundColor: '#6FB8B7',
 	},
 	header: {
 		fontSize: 30,
@@ -79,10 +96,14 @@ const styles = StyleSheet.create({
 	},
 });
 
+const mapStateToProps = (state) => ({
+	userId: state.user,
+});
+
 const mapDispatchToProps = (dispatch) => {
 	return {
 		login: (email, password) => dispatch(getUser(email, password)),
 	};
 };
 
-export default connect(null, mapDispatchToProps)(LoginScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

@@ -9,7 +9,6 @@ import {
 	TouchableOpacity,
 	Text,
 } from 'react-native';
-import { getFirebase } from 'react-redux-firebase';
 
 function Registration(props) {
 	const [fullName, setFullName] = useState('');
@@ -21,6 +20,7 @@ function Registration(props) {
 			alert("Passwords don't match");
 			return;
 		}
+		//confirm that email is not in userDatabase
 		props.createUser(fullName, email, password);
 		props.navigation.replace('Main');
 	};
@@ -41,12 +41,14 @@ function Registration(props) {
 				value={email}
 			/>
 			<TextInput
+				secureTextEntry={true}
 				style={styles.textInput}
 				placeholder='password'
 				onChangeText={(text) => setPassword(text)}
 				value={password}
 			/>
 			<TextInput
+				secureTextEntry={true}
 				style={styles.textInput}
 				placeholder='confirm password'
 				onChangeText={(text) => setConfirmPassword(text)}
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#3da0c2',
+		backgroundColor: '#6FB8B7',
 	},
 	header: {
 		fontSize: 30,
@@ -87,7 +89,6 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		marginBottom: 20,
-		padding: 20,
 		width: 250,
 		height: 30,
 		margin: 10,

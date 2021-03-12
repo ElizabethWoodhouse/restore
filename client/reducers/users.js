@@ -1,20 +1,20 @@
-import { firebase } from '../../firebase.js';
+import firebase from '../../firebase.js';
 
 //actionConstant
 const SET_USER = 'SET_USER';
 const GET_USER = 'GET_USER';
 
 //actionCreator
-const setAUser = (newUser) => {
+const setAUser = (newUserId) => {
 	return {
 		type: SET_USER,
-		newUser,
+		newUserId,
 	};
 };
-const getExistingUser = (user) => {
+const getExistingUser = (userId) => {
 	return {
 		type: GET_USER,
-		user,
+		userId,
 	};
 };
 
@@ -36,58 +36,52 @@ export const setUser = (fullName, email, password) => {
 					.doc(userId)
 					.set(data)
 					.then(() => {
-						dispatch(setAUser({ user: data }));
+						dispatch(setAUser(userId));
 					});
 			})
 			.catch((error) => {
-				alert(error.message);
 				console.log(error.code, error.message);
 			});
 	};
 };
 //resource: https://react-redux-firebase.com/docs/integrations/thunks.html
-
 export const getUser = (email, password) => {
 	return (dispatch) => {
 		firebase
 			.auth()
 			.signInWithEmailAndPassword(email, password)
 			.then((userCredentials) => {
-				const userId = userCredentials.user.uid;
-				const userRef = firebase.firestore().collection('users');
-				userRef
-					.doc(userId)
-					.get()
-					.then((firestoreDocument) => {
-						if (!firestoreDocument.exists) {
-							alert('User does not exist');
-							return;
-						}
-						const user = firestoreDocument.data();
-						dispatch(getExistingUser({ user }));
-					});
+				var userId = userCredentials.user.uid;
+				dispatch(getExistingUser(userId));
 			})
 			.catch((error) => {
-				alert(error);
+				console.log(error.code, error.message);
 			});
 	};
 };
 
-const initialState = {
-	user: {},
+export const signOut = () => {
+	firebase
+		.auth()
+		.signOut()
+		.then(() => {
+			console.log('sign-out successful');
+		})
+		.catch((error) => {
+			console.log(error.code);
+		});
 };
+
+const initialState = '';
 
 //reducer
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case SET_USER:
-			return action.newUser;
+			return action.newUserId;
 		case GET_USER:
-			return action.user;
+			return action.userId;
 		default:
 			return state;
 	}
 };
-
-// Elizabeth@email.com
-//HelloThere!
