@@ -9,6 +9,7 @@ import {
 	Button,
 	View,
 } from 'react-native';
+import DailyGratitudeImage from '../../public/js-images/dailygratitude-image';
 
 class DailyGratitude extends Component {
 	constructor(props) {
@@ -19,19 +20,8 @@ class DailyGratitude extends Component {
 	render() {
 		return (
 			<SafeAreaView style={styles.container}>
-				<Text style={styles.header}>Daily Gratitude</Text>
-				<TextInput
-					// style={styles.textInput}
-					placeholder='What are you grateful for today?'
-					// onChangeText={(text) => setEmail(text)}
-					// value={email}
-				/>
-				<Button
-					style={styles.button}
-					color='#A3D2CA'
-					title='Save Daily Gratitude'
-					// onPress={() => props.navigation.navigate('Login')}
-				/>
+				<DailyGratitudeImage />
+				<View style={styles.taskContainer}>{/* form input */}</View>
 			</SafeAreaView>
 		);
 	}
@@ -49,17 +39,30 @@ const styles = StyleSheet.create({
 		flex: 1,
 		//bring tasks up
 	},
-	header: {
-		flex: 1,
-		fontSize: 30,
-		fontWeight: 'bold',
-		padding: 10,
-		color: '#056676',
+	textInput: {
+		width: 350,
+		height: 55,
+		margin: 10,
+		padding: 8,
+		borderRadius: 14,
+		backgroundColor: '#5F9E9D',
+		fontSize: 18,
+		fontWeight: '500',
 	},
 	button: {
-		marginBottom: 20,
-		padding: 20,
-		backgroundColor: '#A3D2CA',
+		color: 'transparent',
+		alignItems: 'center',
+		padding: 10,
+		borderColor: '#4C322B',
+		width: 150,
+		borderRadius: 20,
+		borderWidth: 0.5,
+		marginTop: 20,
+	},
+	buttonText: {
+		fontSize: 20,
+		color: '#4C322B',
+		fontFamily: 'GillSans-LightItalic',
 	},
 });
 

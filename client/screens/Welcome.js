@@ -9,16 +9,15 @@ import {
 // import { Button } from 'react-native-elements'
 import { connect } from 'react-redux';
 import { useEffect } from 'react/cjs/react.development';
-import Icon from '../../public/icon';
+import Icon from '../../public/js-images/main-image';
 
 function Welcome(props) {
-	//if user is already logged in then go to Main Page
-	// useEffect(() => {
-	// 	console.log(props);
-	// 	if (props.userId === '') {
-	// 		props.navigation.replace('Main');
-	// 	}
-	// });
+	// if user is already logged in then go to Main Page
+	useEffect(() => {
+		if (props.userId === '') {
+			props.navigation.replace('Main');
+		}
+	});
 	return (
 		<SafeAreaView style={styles.container}>
 			<Icon />

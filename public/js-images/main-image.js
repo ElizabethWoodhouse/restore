@@ -3,7 +3,10 @@ import { StyleSheet, Image, View } from 'react-native';
 
 const Icon = () => (
 	<View>
-		<Image style={styles.image} source={require('./restore-logo.png')} />
+		<Image
+			style={styles.image}
+			source={require('../png-images/restore-logo.png')}
+		/>
 	</View>
 );
 

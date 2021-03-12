@@ -9,7 +9,7 @@ import {
 	TouchableOpacity,
 	Text,
 } from 'react-native';
-import RegisterImage from '../../public/register-image';
+import RegisterImage from '../../public/js-images/register-image';
 
 function Registration(props) {
 	const [fullName, setFullName] = useState('');

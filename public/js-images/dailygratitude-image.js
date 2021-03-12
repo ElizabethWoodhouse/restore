@@ -1,13 +1,18 @@
 import React from 'react';
 import { StyleSheet, Image, View } from 'react-native';
 
-const LoginImage = () => (
+const DailyGratitudeImage = () => (
 	<View>
-		<Image style={styles.image} source={require('./login.png')} />
+		<Image
+			style={styles.image}
+			source={require('../png-images/dailygratitude.png')}
+		/>
 	</View>
 );
 
-export default LoginImage;
+
+
+export default DailyGratitudeImage;
 
 const styles = StyleSheet.create({
 	image: {

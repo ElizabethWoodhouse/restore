@@ -34,7 +34,7 @@ function App() {
 					<Stack.Screen name='Login' component={LoginScreen} />
 					<Stack.Screen name='Register' component={Registration} />
 					<Stack.Screen name='Meditate' component={Meditate} />
-					<Stack.Screen name='DailyGratitude' component={DailyGratitude} />
+					<Stack.Screen name='Gratitude' component={DailyGratitude} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</Provider>

@@ -1,13 +1,16 @@
 import React from 'react';
 import { StyleSheet, Image, View } from 'react-native';
 
-const RegisterImage = () => (
+const MeditateImage = () => (
 	<View>
-		<Image style={styles.image} source={require('./register.png')} />
+		<Image
+			style={styles.image}
+			source={require('../png-images/meditate.png')}
+		/>
 	</View>
 );
 
-export default RegisterImage;
+export default MeditateImage;
 
 const styles = StyleSheet.create({
 	image: {

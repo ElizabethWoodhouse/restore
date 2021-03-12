@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { getUser } from '../reducers/users';
-import LoginImage from '../../public/login-image';
+import LoginImage from '../../public/js-images/login-image';
 
 export class LoginScreen extends Component {
 	constructor(props) {
