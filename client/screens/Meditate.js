@@ -9,19 +9,35 @@ import {
 	View,
 } from 'react-native';
 import MeditateImage from '../../public/js-images/meditate-image';
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 class Meditate extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			timerOn: false,
+		};
+		this.handleToggle = this.handleToggle.bind(this);
 	}
-
+	handleToggle() {
+		this.setState({ timerOn: !this.state.timerOn });
+	}
 	render() {
 		return (
 			<SafeAreaView style={styles.container}>
 				<MeditateImage />
 				<View style={styles.taskContainer}>
-					<TouchableOpacity></TouchableOpacity>
+					<CountdownCircleTimer
+						isPlaying
+						duration={60}
+						colors='#056676'></CountdownCircleTimer>
+					<TouchableOpacity
+						style={styles.button}
+						onPress={() => this.handleToggle()}>
+						<Text style={styles.buttonText}>
+							{this.state.timerOn ? 'Pause' : 'Start'}
+						</Text>
+					</TouchableOpacity>
 				</View>
 			</SafeAreaView>
 		);
