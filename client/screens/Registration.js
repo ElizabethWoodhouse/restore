@@ -9,6 +9,7 @@ import {
 	TouchableOpacity,
 	Text,
 } from 'react-native';
+import RegisterImage from '../../public/js-images/register-image';
 
 function Registration(props) {
 	const [fullName, setFullName] = useState('');
@@ -27,7 +28,7 @@ function Registration(props) {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<Text style={styles.header}>New User Registration</Text>
+			<RegisterImage />
 			<TextInput
 				style={styles.textInput}
 				placeholder='Full Name'
@@ -36,26 +37,24 @@ function Registration(props) {
 			/>
 			<TextInput
 				style={styles.textInput}
-				placeholder='email'
+				placeholder='Email'
 				onChangeText={(text) => setEmail(text)}
 				value={email}
 			/>
 			<TextInput
 				secureTextEntry={true}
 				style={styles.textInput}
-				placeholder='password'
+				placeholder='Password'
 				onChangeText={(text) => setPassword(text)}
 				value={password}
 			/>
 			<TextInput
 				secureTextEntry={true}
 				style={styles.textInput}
-				placeholder='confirm password'
+				placeholder='Confirm password'
 				onChangeText={(text) => setConfirmPassword(text)}
 				value={confirmPassword}
 			/>
-			{/* TouchableOpacity: wrapper making views respond properly to touches.
-			(press down=> opacity of wrapped view dims) */}
 			<TouchableOpacity style={styles.button} onPress={() => onRegisterPress()}>
 				<Text style={styles.buttonText}>Create account</Text>
 			</TouchableOpacity>
@@ -83,23 +82,25 @@ const styles = StyleSheet.create({
 		margin: 10,
 		padding: 8,
 		borderRadius: 14,
-		backgroundColor: 'white',
+		backgroundColor: '#5F9E9D',
 		fontSize: 18,
-		fontWeight: '500',
+		fontFamily: 'AvenirNext-Regular',
+		color: '#4C322B',
 	},
 	button: {
-		marginBottom: 20,
-		width: 250,
-		height: 30,
-		margin: 10,
-		padding: 8,
-		borderRadius: 14,
-		backgroundColor: 'white',
+		color: 'transparent',
+		alignItems: 'center',
+		padding: 10,
+		borderColor: '#4C322B',
+		width: 150,
+		borderRadius: 20,
+		borderWidth: 0.5,
+		marginTop: 20,
 	},
 	buttonText: {
-		textAlign: 'center',
-		fontSize: 18,
-		fontWeight: 'bold',
+		fontSize: 20,
+		color: '#4C322B',
+		fontFamily: 'GillSans-LightItalic',
 	},
 });
 

@@ -8,17 +8,37 @@ import {
 	TouchableOpacity,
 	View,
 } from 'react-native';
+import MeditateImage from '../../public/js-images/meditate-image';
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 class Meditate extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			timerOn: false,
+		};
+		this.handleToggle = this.handleToggle.bind(this);
 	}
-
+	handleToggle() {
+		this.setState({ timerOn: !this.state.timerOn });
+	}
 	render() {
 		return (
 			<SafeAreaView style={styles.container}>
-				<Text style={styles.header}>Meditate</Text>
+				<MeditateImage />
+				<View style={styles.taskContainer}>
+					<CountdownCircleTimer
+						isPlaying
+						duration={60}
+						colors='#056676'></CountdownCircleTimer>
+					<TouchableOpacity
+						style={styles.button}
+						onPress={() => this.handleToggle()}>
+						<Text style={styles.buttonText}>
+							{this.state.timerOn ? 'Pause' : 'Start'}
+						</Text>
+					</TouchableOpacity>
+				</View>
 			</SafeAreaView>
 		);
 	}
@@ -32,26 +52,24 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: '#6FB8B7',
 	},
-	header: {
+	taskContainer: {
 		flex: 1,
-		fontSize: 30,
-		fontWeight: 'bold',
-		padding: 10,
-		color: '#056676',
+		//bring tasks up
 	},
 	button: {
-		width: 500,
-		height: 50,
-		margin: 10,
-		padding: 8,
-		borderRadius: 10,
-		backgroundColor: '#A3D2CA',
+		color: 'transparent',
+		alignItems: 'center',
+		padding: 10,
+		borderColor: '#4C322B',
+		width: 150,
+		borderRadius: 20,
+		borderWidth: 0.5,
+		marginTop: 20,
 	},
 	buttonText: {
-		textAlign: 'center',
-		fontSize: 18,
-		fontWeight: 'bold',
-		color: '#056676',
+		fontSize: 20,
+		color: '#4C322B',
+		fontFamily: 'GillSans-LightItalic',
 	},
 });
 
