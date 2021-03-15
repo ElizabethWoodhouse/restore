@@ -11,7 +11,7 @@ import Icon from '../../public/js-images/main-image';
 import HomePageImage from '../../public/js-images/homepage-image';
 import firebase from '../../firebase.js';
 
-function Welcome(props) {
+export default function Welcome(props) {
 	const [initializing, setInitializing] = useState(true);
 	const [user, setUser] = useState();
 	function onAuthStateChanged(user) {
@@ -69,12 +69,6 @@ function Welcome(props) {
 		</SafeAreaView>
 	);
 }
-
-const mapStateToProps = (state) => ({
-	userId: state.user,
-});
-
-export default connect(mapStateToProps)(Welcome);
 
 const styles = StyleSheet.create({
 	container: {
