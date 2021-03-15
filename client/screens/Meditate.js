@@ -31,7 +31,10 @@ class Meditate extends Component {
 						isPlaying={this.state.timerOn}
 						duration={5}
 						colors='#056676'
-						size='360'></CountdownCircleTimer>
+						size='360'
+						onComplete={() => {
+							this.props.navigation.replace('Main');
+						}}></CountdownCircleTimer>
 				</View>
 				<View style={styles.taskContainer}>
 					<TouchableOpacity

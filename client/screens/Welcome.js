@@ -1,36 +1,71 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	StyleSheet,
 	Text,
 	SafeAreaView,
-	Button,
 	TouchableOpacity,
+	View,
 } from 'react-native';
-// import { Button } from 'react-native-elements'
 import { connect } from 'react-redux';
-import { useEffect } from 'react/cjs/react.development';
 import Icon from '../../public/js-images/main-image';
+import HomePageImage from '../../public/js-images/homepage-image';
+import firebase from '../../firebase.js';
 
 function Welcome(props) {
+	const [initializing, setInitializing] = useState(true);
+	const [user, setUser] = useState();
+	function onAuthStateChanged(user) {
+		setUser(user);
+		if (initializing) setInitializing(false);
+	}
+	function signOut() {
+		firebase
+			.auth()
+			.signOut()
+			.then(() => console.log('User signed out!'));
+	}
 	// if user is already logged in then go to Main Page
 	useEffect(() => {
-		if (props.userId === '') {
-			props.navigation.replace('Main');
-		}
-	});
+		const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+		return subscriber; // unsubscribe on unmount
+	}, []);
+	if (initializing) return null;
+	if (!user) {
+		return (
+			<SafeAreaView style={styles.container}>
+				<Icon />
+				<TouchableOpacity
+					style={styles.button}
+					onPress={() => props.navigation.navigate('Register')}>
+					<Text style={styles.buttonText}>Register</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+					style={styles.button}
+					onPress={() => props.navigation.navigate('Login')}>
+					<Text style={styles.buttonText}>Log In</Text>
+				</TouchableOpacity>
+			</SafeAreaView>
+		);
+	}
+	//if user is logged in show this page
 	return (
 		<SafeAreaView style={styles.container}>
-			<Icon />
-			<TouchableOpacity
-				style={styles.button}
-				onPress={() => props.navigation.navigate('Register')}>
-				<Text style={styles.buttonText}>Register</Text>
-			</TouchableOpacity>
-			<TouchableOpacity
-				style={styles.button}
-				onPress={() => props.navigation.navigate('Login')}>
-				<Text style={styles.buttonText}>Log In</Text>
-			</TouchableOpacity>
+			<HomePageImage />
+			<View style={styles.taskContainer}>
+				<TouchableOpacity
+					style={styles.button}
+					onPress={() => props.navigation.navigate('Meditate')}>
+					<Text style={styles.buttonText}>Meditate</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+					style={styles.button}
+					onPress={() => props.navigation.navigate('Gratitude')}>
+					<Text style={styles.buttonText}>Daily Gratitude</Text>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.button} onPress={signOut}>
+					<Text style={styles.buttonText}>Sign Out</Text>
+				</TouchableOpacity>
+			</View>
 		</SafeAreaView>
 	);
 }
@@ -44,9 +79,12 @@ export default connect(mapStateToProps)(Welcome);
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#6FB8B7',
-		alignItems: 'center',
 		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#6FB8B7',
+	},
+	taskContainer: {
+		flex: 1,
 	},
 	button: {
 		color: 'transparent',
@@ -56,7 +94,7 @@ const styles = StyleSheet.create({
 		width: 150,
 		borderRadius: 20,
 		borderWidth: 0.5,
-		marginBottom: 20,
+		marginTop: 20,
 	},
 	buttonText: {
 		fontSize: 20,

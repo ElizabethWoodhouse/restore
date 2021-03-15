@@ -44,6 +44,8 @@ export const setUser = (fullName, email, password) => {
 			});
 	};
 };
+
+
 //resource: https://react-redux-firebase.com/docs/integrations/thunks.html
 export const getUser = (email, password) => {
 	return (dispatch) => {

@@ -8,7 +8,6 @@ import store from './client/store';
 //Import other screens in my application
 import {
 	Welcome,
-	MainHabit,
 	LoginScreen,
 	Registration,
 	Meditate,
@@ -30,7 +29,6 @@ function App() {
 			<NavigationContainer>
 				<Stack.Navigator initialRouteName='Welcome'>
 					<Stack.Screen name='Welcome' component={Welcome} />
-					<Stack.Screen name='Main' component={MainHabit} />
 					<Stack.Screen name='Login' component={LoginScreen} />
 					<Stack.Screen name='Register' component={Registration} />
 					<Stack.Screen name='Meditate' component={Meditate} />
