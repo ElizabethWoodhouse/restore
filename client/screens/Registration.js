@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setUser } from '../reducers/users';
-
 import {
 	StyleSheet,
 	TextInput,
@@ -10,22 +9,34 @@ import {
 	Text,
 } from 'react-native';
 import RegisterImage from '../../public/js-images/register-image';
+import firebase from '../../firebase.js';
 
 function Registration(props) {
+	const [initializing, setInitializing] = useState(true);
+	const [user, setUser] = useState();
 	const [fullName, setFullName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
+	const onAuthStateChanged = (user) => {
+		setUser(user);
+		if (initializing) setInitializing(false);
+		if (user) {
+			props.navigation.navigate('Welcome');
+		}
+	};
+	useEffect(() => {
+		const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+		return subscriber; // unsubscribe on unmount
+	}, []);
+	if (initializing) return null;
 	const onRegisterPress = () => {
 		if (password !== confirmPassword) {
 			alert("Passwords don't match");
 			return;
 		}
-		//confirm that email is not in userDatabase
 		props.createUser(fullName, email, password);
-		props.navigation.navigate('Welcome');
 	};
-
 	return (
 		<SafeAreaView style={styles.container}>
 			<RegisterImage />

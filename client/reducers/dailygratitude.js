@@ -1,4 +1,4 @@
-import firebase from '../../firebase.js';
+import db from '../../firebase.js';
 
 //actionConstant
 const GET_ENTRY = 'GET_ENTRY';
@@ -12,7 +12,7 @@ const getEntry = (entry) => {
 	};
 };
 
-const saveEntry = (newEntry) => {
+const setEntry = (newEntry) => {
 	return {
 		type: SET_ENTRY,
 		newEntry,
@@ -20,14 +20,45 @@ const saveEntry = (newEntry) => {
 };
 
 //thunks
+//need to update to fetch entry
 export const fetchEntry = (userId, date) => {
-	return (dispatch) => {};
+	return (dispatch) => {
+		try {
+			db()
+				.collection('dailyGratitudeHistory')
+				.where('userId', '==', userId)
+				.where('date', '==', date)
+				.limit(1)
+				.get()
+				.then((querySnapshot) => {
+					dispatch(getEntry(querySnapshot));
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	};
 	//get all task status
 };
 
-export const setEntry = (entry, userId, date) => {
-	return (dispatch) => {};
-	//get all task status
+//need to update to save entry
+export const saveEntry = (entry, userId, date) => {
+	return (dispatch) => {
+		try {
+			db()
+				.collection('dailyGratitudeHistory')
+				.add({
+					date: date,
+					text: entry,
+					userId: userId,
+				})
+				.then(() => {
+					console.log('Entry added!');
+					dispatch(setEntry(entry));
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	};
 };
 
 //unsure if this is the best way to keep this state
