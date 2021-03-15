@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { updateTask } from '../reducers/tracker';
-import { fetchEntry, setEntry } from '../reducers/dailygratitude';
+import { fetchEntry, saveEntry } from '../reducers/dailygratitude';
 import {
 	StyleSheet,
 	Text,
@@ -12,39 +12,31 @@ import {
 } from 'react-native';
 import DailyGratitudeImage from '../../public/js-images/dailygratitude-image';
 
-class DailyGratitude extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			entry: '',
-		};
-	}
-	componentDidMount() {
-		// const today = new date();
-		// this.props.getEntry(this.props.userId, today);
-	}
-	render() {
-		return (
-			<SafeAreaView style={styles.container}>
-				<DailyGratitudeImage />
-				<View style={styles.taskContainer}>
-					<TextInput
-						style={styles.textInput}
-						multiline={true}
-						onChangeText={(text) => this.setState({ entry: text })}
-					/>
-					<TouchableOpacity
-						style={styles.button}
-						onPress={() => {
-							//call on the thunks to save what is currently in daily gratitude
-							this.props.navigation.replace('Main');
-						}}>
-						<Text style={styles.buttonText}>Save Entry</Text>
-					</TouchableOpacity>
-				</View>
-			</SafeAreaView>
-		);
-	}
+function DailyGratitude(props) {
+	const date = new Date();
+	const [initializing, setInitializing] = useState(true);
+	const [entry, setEntry] = useState('');
+	const onSave = () => {
+		saveEntry(entry, props.userId, date);
+		//need to actually save the entry
+		props.navigation.navigate('Welcome');
+	};
+	return (
+		<SafeAreaView style={styles.container}>
+			<DailyGratitudeImage />
+			<View style={styles.taskContainer}>
+				<TextInput
+					style={styles.textInput}
+					multiline={true}
+					autoCorrect={true}
+					onChangeText={(text) => setEntry(text)}
+				/>
+				<TouchableOpacity style={styles.button} onPress={onSave}>
+					<Text style={styles.buttonText}>Save Entry</Text>
+				</TouchableOpacity>
+			</View>
+		</SafeAreaView>
+	);
 }
 
 //CSS Styling
@@ -59,8 +51,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	textInput: {
-		width: 600,
-		height: 400,
+		width: 350,
+		height: 350,
 		margin: 10,
 		padding: 8,
 		borderRadius: 14,
@@ -90,13 +82,13 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
 	entry: state.entry,
 	userId: state.user,
-	//entry inputted
 });
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		getEntry: (userId, date) => dispatch(fetchEntry(userId, date)),
-		setEntry: (entry, userId, date) => dispatch(setEntry(entry, userId, date)),
+		saveEntry: (entry, userId, date) =>
+			dispatch(saveEntry(entry, userId, date)),
 	};
 };
 

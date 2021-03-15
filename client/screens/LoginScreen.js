@@ -28,8 +28,9 @@ function LoginScreen(props) {
 		return subscriber; // unsubscribe on unmount
 	}, []);
 	if (initializing) return null;
-	const onLoginPress = () => {
-		props.login(email, password);
+	const onLoginPress = async () => {
+		const login = await props.login(email, password);
+		console.log('LOGIN SCREEN', login);
 	};
 	return (
 		<SafeAreaView style={styles.container}>
@@ -101,71 +102,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
-
-// export class LoginScreen extends Component {
-// 	constructor(props) {
-// 		super(props);
-// 		this.state = {
-// 			email: '',
-// 			password: '',
-// 			userId: '',
-// 		};
-// 		this.onLoginPress = this.onLoginPress.bind(this);
-// 	}
-// 	onLoginPress() {
-// 		this.props.login(this.state.email, this.state.password);
-// 		console.log('USERID', this.props.userId);
-// 		//ability to ensure logged in user is actually right
-// 		// this.props.navigation.navigate('Welcome');
-// 	}
-// 	render() {
-// 		const { email, password } = this.state || '';
-// 		return (
-// 			<SafeAreaView style={styles.container}>
-// 				<LoginImage />
-// 				<TextInput
-// 					style={styles.textInput}
-// 					placeholder='Email'
-// 					onChangeText={(evt) => {
-// 						this.setState({ email: evt });
-// 					}}
-// 				/>
-// 				<TextInput
-// 					secureTextEntry={true}
-// 					style={styles.textInput}
-// 					placeholder='Password'
-// 					onChangeText={(evt) => {
-// 						this.setState({ password: evt });
-// 					}}
-// 				/>
-// 				<TouchableOpacity
-// 					style={styles.button}
-// 					onPress={() => this.onLoginPress()}>
-// 					<Text style={styles.buttonText}>Log in</Text>
-// 				</TouchableOpacity>
-// 			</SafeAreaView>
-// 		);
-// 	}
-// }
-
-// export default function Welcome(props) {
-// 	const [initializing, setInitializing] = useState(true);
-// 	const [user, setUser] = useState();
-// 	function onAuthStateChanged(user) {
-// 		setUser(user);
-// 		if (initializing) setInitializing(false);
-// 	}
-// 	function signOut() {
-// 		firebase
-// 			.auth()
-// 			.signOut()
-// 			.then(() => console.log('User signed out!'));
-// 	}
-// 	// if user is already logged in then go to Main Page
-// 	useEffect(() => {
-// 		const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
-// 		return subscriber; // unsubscribe on unmount
-// 	}, []);
-// 	if (initializing) return null;
-// 	}
-// }

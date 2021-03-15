@@ -33,7 +33,7 @@ class Meditate extends Component {
 						colors='#056676'
 						size='360'
 						onComplete={() => {
-							this.props.navigation.replace('Main');
+							this.props.navigation.replace('Welcome');
 						}}></CountdownCircleTimer>
 				</View>
 				<View style={styles.taskContainer}>
