@@ -21,43 +21,16 @@ const setEntry = (newEntry) => {
 
 //thunks
 //need to update to fetch entry
-export const fetchEntry = (userId, date) => {
-	return (dispatch) => {
-		try {
-			db()
-				.collection('dailyGratitudeHistory')
-				.where('userId', '==', userId)
-				.where('date', '==', date)
-				.limit(1)
-				.get()
-				.then((querySnapshot) => {
-					dispatch(getEntry(querySnapshot));
-				});
-		} catch (error) {
-			console.log(error);
-		}
+export const fetchEntry = () => {
+	return () => {
+		getEntry();
 	};
-	//get all task status
 };
 
 //need to update to save entry
-export const saveEntry = (entry, userId, date) => {
+export const saveEntry = (entry) => {
 	return (dispatch) => {
-		try {
-			db()
-				.collection('dailyGratitudeHistory')
-				.add({
-					date: date,
-					text: entry,
-					userId: userId,
-				})
-				.then(() => {
-					console.log('Entry added!');
-					dispatch(setEntry(entry));
-				});
-		} catch (error) {
-			console.log(error);
-		}
+		dispatch(setEntry(entry));
 	};
 };
 
@@ -68,7 +41,7 @@ const initialState = '';
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case GET_ENTRY:
-			return action.entry;
+			return state;
 		case SET_ENTRY:
 			return action.newEntry;
 		default:
