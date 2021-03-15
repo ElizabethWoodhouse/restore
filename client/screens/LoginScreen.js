@@ -25,7 +25,7 @@ export class LoginScreen extends Component {
 	onLoginPress() {
 		this.props.login(this.state.email, this.state.password);
 		//ability to ensure logged in user is actually right
-		this.props.navigation.replace('Main');
+		this.props.navigation.navigate('Welcome');
 	}
 	render() {
 		const { email, password } = this.state || '';

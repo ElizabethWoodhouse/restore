@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {} from '../reducers/tracker';
+import { updateTask } from '../reducers/tracker';
+import { fetchEntry, setEntry } from '../reducers/dailygratitude';
 import {
 	StyleSheet,
 	Text,
@@ -14,9 +15,14 @@ import DailyGratitudeImage from '../../public/js-images/dailygratitude-image';
 class DailyGratitude extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			entry: '',
+		};
 	}
-
+	componentDidMount() {
+		// const today = new date();
+		// this.props.getEntry(this.props.userId, today);
+	}
 	render() {
 		return (
 			<SafeAreaView style={styles.container}>
@@ -25,13 +31,14 @@ class DailyGratitude extends Component {
 					<TextInput
 						style={styles.textInput}
 						multiline={true}
-						// onChangeText={(text) => setEmail(text)}
-						// value={email}
+						onChangeText={(text) => this.setState({ entry: text })}
 					/>
 					<TouchableOpacity
 						style={styles.button}
-						// onPress={() => onRegisterPress()}
-					>
+						onPress={() => {
+							//call on the thunks to save what is currently in daily gratitude
+							this.props.navigation.replace('Main');
+						}}>
 						<Text style={styles.buttonText}>Save Entry</Text>
 					</TouchableOpacity>
 				</View>
@@ -80,10 +87,17 @@ const styles = StyleSheet.create({
 	},
 });
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+	entry: state.entry,
+	userId: state.user,
+	//entry inputted
+});
 
 const mapDispatchToProps = (dispatch) => {
-	return {};
+	return {
+		getEntry: (userId, date) => dispatch(fetchEntry(userId, date)),
+		setEntry: (entry, userId, date) => dispatch(setEntry(entry, userId, date)),
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DailyGratitude);

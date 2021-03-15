@@ -23,7 +23,7 @@ function Registration(props) {
 		}
 		//confirm that email is not in userDatabase
 		props.createUser(fullName, email, password);
-		props.navigation.replace('Main');
+		props.navigation.navigate('Welcome');
 	};
 
 	return (

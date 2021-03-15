@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {} from '../reducers/tracker';
+import { updateTask } from '../reducers/tracker';
 import {
 	StyleSheet,
 	Text,
@@ -28,9 +28,15 @@ class Meditate extends Component {
 				<MeditateImage />
 				<View style={styles.taskContainer}>
 					<CountdownCircleTimer
-						isPlaying
-						duration={60}
-						colors='#056676'></CountdownCircleTimer>
+						isPlaying={this.state.timerOn}
+						duration={5}
+						colors='#056676'
+						size='360'
+						onComplete={() => {
+							this.props.navigation.replace('Main');
+						}}></CountdownCircleTimer>
+				</View>
+				<View style={styles.taskContainer}>
 					<TouchableOpacity
 						style={styles.button}
 						onPress={() => this.handleToggle()}>
