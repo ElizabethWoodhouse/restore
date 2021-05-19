@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { updateTask } from '../reducers/tracker';
-import { fetchEntry, saveEntry } from '../reducers/dailygratitude';
+import { saveEntry, fetchEntry } from '../reducers/dailygratitude';
 import {
 	StyleSheet,
 	Text,
@@ -17,15 +16,19 @@ function DailyGratitude(props) {
 	const [initializing, setInitializing] = useState(true);
 	const [entry, setEntry] = useState('');
 	const onSave = () => {
-		saveEntry(entry, props.userId, date);
-		//need to actually save the entry
+		props.saveEntry(entry);
 		props.navigation.navigate('Welcome');
 	};
+	useEffect(() => {
+		fetchEntry();
+		setEntry(props.entry);
+	}, []);
 	return (
 		<SafeAreaView style={styles.container}>
 			<DailyGratitudeImage />
 			<View style={styles.taskContainer}>
 				<TextInput
+					value={entry}
 					style={styles.textInput}
 					multiline={true}
 					autoCorrect={true}
@@ -86,9 +89,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		getEntry: (userId, date) => dispatch(fetchEntry(userId, date)),
-		saveEntry: (entry, userId, date) =>
-			dispatch(saveEntry(entry, userId, date)),
+		fetchEntry: () => dispatch(fetchEntry),
+		saveEntry: (entry) => dispatch(saveEntry(entry)),
 	};
 };
 
