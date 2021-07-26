@@ -13,7 +13,7 @@
 Restore is a self-care mobile application that allows users to build habits.
 Users can meditate and journal each day.
 
-<img src="./public/png-images/Restore.gif" alt="restore gif" height="350">
+<img src="./public/png-images/Restore.gif" alt="restore gif" height="700">
 
 ## Technologies
 
