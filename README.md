@@ -37,11 +37,7 @@ A list of frequently asked questions
 2.  **What's next for Restore?**
     My goals for the future of Restore are:
 
-    UI:
-
-    - Creating an alert when meditation is complete.
-    - Providing the users an option to choose a sound to meditate to.
-      Features:
+    - UI: Creating an alert when meditation is complete.
     - Tracking: building out a user profile page where self-care habits are tracked for the week and eventually for the year.
     - Water and mood log: Adding a section for users to track their water intake and mood each day.
     - Movement log: Adding a page that serves up youtube videos of excercises the user can do each day.
