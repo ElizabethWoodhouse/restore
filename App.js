@@ -1,5 +1,6 @@
-import 'react-native-gesture-handler'; //provides native-driven gesture management APIs for building best possible touch-based experiences in React Native
-import React, { useState, useEffect } from 'react';
+//provides native-driven gesture management APIs for building best possible touch-based experiences in React Native
+import 'react-native-gesture-handler'; 
+import React from 'react';
 //redux
 import { Provider } from 'react-redux';
 import store from './client/store';
