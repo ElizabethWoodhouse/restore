@@ -30,8 +30,8 @@ A list of frequently asked questions
 
 1.  **How to run Restore locally**
 
-    - npm install
-    - npm start
+    - yarn install
+    - yarn start
     - expo devtools will run, please navigate there to view Restore in either the web or device simulator
 
 2.  **What's next for Restore?**
