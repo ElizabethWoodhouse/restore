@@ -10,7 +10,6 @@ import {
 import MeditateImage from '../../public/js-images/meditate-image';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
-
 const Meditate = (props) => {
 	const [isTimerOn, setIsTimerOn] = useState<boolean>(false)
 	const handleToggle = () => {

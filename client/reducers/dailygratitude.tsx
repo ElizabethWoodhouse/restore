@@ -1,9 +1,10 @@
+import { AppDispatch } from '../store';
 //actionConstant
 const GET_ENTRY = 'GET_ENTRY';
 const SET_ENTRY = 'SET_ENTRY';
 
 //actionCreator
-const getEntry = (entry) => {
+const getEntry = (entry: string) => {
 	return {
 		type: GET_ENTRY,
 
@@ -11,7 +12,7 @@ const getEntry = (entry) => {
 	};
 };
 
-const setEntry = (newEntry) => {
+const setEntry = (newEntry:string) => {
 	return {
 		type: SET_ENTRY,
 		newEntry,
@@ -28,8 +29,8 @@ export const fetchEntry = () => {
 };
 
 //need to update to save entry
-export const saveEntry = (entry) => {
-	return (dispatch) => {
+export const saveEntry = (entry:string) => {
+	return (dispatch: AppDispatch) => {
 		dispatch(setEntry(entry));
 	};
 };

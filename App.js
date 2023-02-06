@@ -9,12 +9,12 @@ import store from './client/store';
 //Import other screens in my application
 import {
 	Welcome,
-	LoginScreen,
+	Login,
 	Registration,
 	Meditate,
 	DailyGratitude,
 } from './client/screens/index';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 //information on navigation props:
@@ -30,7 +30,7 @@ function App() {
 			<NavigationContainer>
 				<Stack.Navigator initialRouteName='Welcome'>
 					<Stack.Screen name='Welcome' component={Welcome} />
-					<Stack.Screen name='Login' component={LoginScreen} />
+					<Stack.Screen name='Login' component={Login} />
 					<Stack.Screen name='Register' component={Registration} />
 					<Stack.Screen name='Meditate' component={Meditate} />
 					<Stack.Screen name='Gratitude' component={DailyGratitude} />

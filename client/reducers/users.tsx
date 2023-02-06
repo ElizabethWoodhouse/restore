@@ -5,13 +5,13 @@ const SET_USER = 'SET_USER';
 const GET_USER = 'GET_USER';
 
 //actionCreator
-const setAUser = (newUserId) => {
+const setAUser = (newUserId?: string) => {
 	return {
 		type: SET_USER,
 		newUserId,
 	};
 };
-const getExistingUser = (userId) => {
+const getExistingUser = (userId?: string) => {
 	return {
 		type: GET_USER,
 		userId,
@@ -19,7 +19,7 @@ const getExistingUser = (userId) => {
 };
 
 //thunks
-export const setUser = (fullName, email, password) => {
+export const setUser = (fullName: string, email: string, password:string) => {
 	return (dispatch) => {
 		firebase
 			.auth()
@@ -46,7 +46,7 @@ export const setUser = (fullName, email, password) => {
 };
 
 //resource: https://react-redux-firebase.com/docs/integrations/thunks.html
-export const getUser = (email, password) => {
+export const getUser = (email:string, password:string) => {
 	return (dispatch) => {
 		firebase
 			.auth()

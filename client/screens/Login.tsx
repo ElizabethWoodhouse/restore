@@ -108,4 +108,4 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
