@@ -1,7 +1,7 @@
 import Welcome from './Welcome';
-import LoginScreen from './LoginScreen';
+import Login from './Login';
 import Registration from './Registration';
 import Meditate from './Meditate';
 import DailyGratitude from './DailyGratitude';
 
-export { Welcome, LoginScreen, Registration, Meditate, DailyGratitude };
+export { Welcome, Login, Registration, Meditate, DailyGratitude };
